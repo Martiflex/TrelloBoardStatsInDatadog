@@ -14,7 +14,7 @@ import datadog
 DONE_LIST_ID = 'XXXXXXXXXXXXXXXXXXXXXXX'
 INBOX_LIST_ID = 'YYYYYYYYYYYYYYYYYYYYYYYY' # any other list than 'Done' will do
 
-BOARD_NAME_EXPECTED_ID = '5d32ff5ed0cba81185e0be9f'
+BOARD_NAME_EXPECTED_ID = 'ddddddddddddddddddddddddddd'
 
 class TestDatadogCredentials(unittest.TestCase):
     
