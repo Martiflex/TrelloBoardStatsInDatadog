@@ -11,8 +11,8 @@ import trello_stats
 import datadog
 
 
-DONE_LIST_ID = '5d32ff606307018132efd181'
-INBOX_LIST_ID = '5d32ff5fa20dcc57b65b3574' # any other list than 'Done' will do
+DONE_LIST_ID = 'XXXXXXXXXXXXXXXXXXXXXXX'
+INBOX_LIST_ID = 'YYYYYYYYYYYYYYYYYYYYYYYY' # any other list than 'Done' will do
 
 BOARD_NAME_EXPECTED_ID = '5d32ff5ed0cba81185e0be9f'
 
