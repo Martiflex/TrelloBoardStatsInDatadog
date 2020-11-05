@@ -1,0 +1,21 @@
+from datadog import initialize, api
+from trello_stats import initialize_datadog
+
+initialize_datadog()
+
+title = "Task board telemetry"
+description = ""
+widgets = [{"id":3581351849044778,"definition":{"type":"timeseries","requests":[{"q":"avg:trello.backlog{$board}.rollup(max), avg:trello.backlog_stale{$board}.rollup(max)","display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"title":"Total cards and Stale Cards","title_size":"16","title_align":"left","show_legend":False,"legend_size":"0"},"layout":{"x":46,"y":0,"width":56,"height":21}},{"id":6580368006907485,"definition":{"type":"query_value","requests":[{"q":"avg:trello.backlog{$board}","aggregator":"last"}],"title":"Current backlog","title_size":"16","title_align":"left","time":{"live_span":"1h"},"autoscale":True,"precision":2},"layout":{"x":26,"y":0,"width":19,"height":10}},{"id":813015669233479,"definition":{"type":"query_value","requests":[{"q":"avg:trello.backlog{$board}.rollup(max)","aggregator":"max","conditional_formats":[{"comparator":">","value":0,"palette":"white_on_yellow"}]}],"title":"Max backlog","title_size":"16","title_align":"left","autoscale":True,"precision":2},"layout":{"x":26,"y":11,"width":19,"height":10}},{"id":4340996218554077,"definition":{"type":"note","content":"####  Open cards == WIP in the system\n\n- Some is fine\n- More is **mental load**\n- Too much slows productivity\n\n#### What to do?\n\n- **archive** cards in Done and Won't do\n- accept there are things you won't do\n- get rid of some reference materials","background_color":"white","font_size":"14","text_align":"left","show_tick":True,"tick_pos":"50%","tick_edge":"right"},"layout":{"x":0,"y":0,"width":24,"height":21}},{"id":2219146406566751,"definition":{"type":"note","content":"#### Completion time == Trust\n\nWhen tasks are added in the system will they be delivered in a reasonable time?\n\nOver tasks _done_ in the past 30 days: \n\n- what's the median delivery time?\n- how much time to complete the 25% longest tasks?\n- and the 10% longest?","background_color":"white","font_size":"14","text_align":"left","show_tick":True,"tick_pos":"50%","tick_edge":"right"},"layout":{"x":0,"y":28,"width":24,"height":21}},{"id":1597763556156400,"definition":{"type":"timeseries","requests":[{"q":"avg:trello.completion_time.50p{$board}.rollup(max), avg:trello.completion_time.75p{$board}.rollup(max), avg:trello.completion_time.90p{$board}.rollup(max), avg:trello.completion_time.max{$board}.rollup(max)","display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":True},"title":"Delivery time (percentiles) evolution","title_size":"16","title_align":"left","time":{"live_span":"3mo"},"show_legend":False,"legend_size":"0"},"layout":{"x":26,"y":28,"width":54,"height":21}},{"id":2589572664717831,"definition":{"type":"query_value","requests":[{"q":"avg:trello.completion_time.75p{$board}","aggregator":"last"}],"title":"Current 75percentile completion time","title_size":"16","title_align":"left","time":{"live_span":"1h"},"autoscale":True,"precision":2},"layout":{"x":81,"y":39,"width":21,"height":10}},{"id":4243997612665005,"definition":{"type":"note","content":"Cards in the \"Done\" column for less than 30 days","background_color":"blue","font_size":"18","text_align":"center","show_tick":True,"tick_pos":"50%","tick_edge":"bottom"},"layout":{"x":25,"y":22,"width":77,"height":5}},{"id":6761046352034589,"definition":{"type":"query_value","requests":[{"q":"avg:trello.completion_time.count{$board}","aggregator":"last"}],"title":"#Cards recently done","title_size":"16","title_align":"left","time":{"live_span":"1h"},"autoscale":True,"precision":2},"layout":{"x":81,"y":28,"width":21,"height":10}}]
+layout_type = 'free'
+is_read_only = False
+notify_list = []
+template_variables = [{"name":"board","default":"*","prefix":"board"}]
+
+res = api.Dashboard.create(title=title,
+                     widgets=widgets,
+                     layout_type=layout_type,
+                     description=description,
+                     is_read_only=is_read_only,
+                     notify_list=notify_list,
+                     template_variables=template_variables)
+print("Dashboard id %s created: %s" %(res['id'],res['url']))
