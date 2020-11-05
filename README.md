@@ -30,6 +30,7 @@ Adjust credentials and configs directly in the trello_stats.py main file:
 
 ##### Mandatory credentials
 
+```
 DD_API_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 DD_APP_KEY = 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
 TRELLO_API_KEY = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
@@ -37,9 +38,11 @@ TRELLO_API_SECRET = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
 BOARD_NAME = '<NAME OF YOUR BOARD AS SEEN ON TRELLO'
 DONE_LIST_NAME = '<NAME OF YOUR DONE LIST AS SEEN ON TRELLO'
+````
 
 ##### Additional parameters Optional parameters
 
+```
 STALE_CARDS_THRESHOLD_IN_DAYS = 30
 COMPLETION_TIME_CARD_AGE_LIMIT = 30 # only cards finished between now and COMPLETION_TIME_CARD_AGE_LIMIT are used for percentiles calculation
 
@@ -48,3 +51,4 @@ CLEANUP_CARDS_OLDER_THAN_DAYS = 30
 MOVE_ARCHIVED_INSTEAD_OF_DELETE = True # False means removing old archive cards
 ARCHIVE_BOARD_NAME = '<NAME OF THE OTHER BOARD AS SEEN ON TRELLO>'
 ARCHIVE_LIST_NAME = '<NAME OF THE OTHER LIST AS SEEN ON TRELLO>'
+```
